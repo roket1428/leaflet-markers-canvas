@@ -256,7 +256,7 @@
       L.Util.stamp(marker);
 
       var latLng = marker.getLatLng();
-      var isVisible = this._map.getBounds().contains(latLng);
+      var isVisible = this._map.getBounds(true).contains(latLng);
       var ref = this._map.latLngToContainerPoint(latLng);
       var x = ref.x;
       var y = ref.y;
