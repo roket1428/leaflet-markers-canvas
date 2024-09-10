@@ -112,7 +112,7 @@
 
     removeMarker: function removeMarker(marker) {
       var latLng = marker.getLatLng();
-      var isVisible = this._map.getBounds().contains(latLng);
+      var isVisible = this._map.getBounds(true).contains(latLng);
 
       var positionBox = {
         minX: latLng.lng,
@@ -139,7 +139,7 @@
 
       markers.forEach(function (marker) {
         var latLng = marker.getLatLng();
-        var isVisible = this$1._map.getBounds().contains(latLng);
+        var isVisible = this$1._map.getBounds(true).contains(latLng);
 
         var positionBox = {
           minX: latLng.lng,
@@ -363,7 +363,7 @@
 
       if (!this._map || !this._positionsTree) { return; }
 
-      var mapBounds = this._map.getBounds();
+      var mapBounds = this._map.getBounds(true);
       var mapBoundsBox = {
         minX: mapBounds.getWest(),
         minY: mapBounds.getSouth(),
@@ -471,7 +471,7 @@
     _animateZoom: function _animateZoom(event) {
       var scale = this._map.getZoomScale(event.zoom);
       var offset = this._map._latLngBoundsToNewLayerBounds(
-        this._map.getBounds(),
+        this._map.getBounds(true),
         event.zoom,
         event.center
       ).min;

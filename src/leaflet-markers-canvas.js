@@ -98,7 +98,7 @@ const markersCanvas = {
 
   removeMarker(marker) {
     const latLng = marker.getLatLng();
-    const isVisible = this._map.getBounds().contains(latLng);
+    const isVisible = this._map.getBounds(true).contains(latLng);
 
     const positionBox = {
       minX: latLng.lng,
@@ -123,7 +123,7 @@ const markersCanvas = {
 
     markers.forEach((marker) => {
       const latLng = marker.getLatLng();
-      const isVisible = this._map.getBounds().contains(latLng);
+      const isVisible = this._map.getBounds(true).contains(latLng);
 
       const positionBox = {
         minX: latLng.lng,
@@ -324,7 +324,7 @@ const markersCanvas = {
 
     if (!this._map || !this._positionsTree) return;
 
-    const mapBounds = this._map.getBounds();
+    const mapBounds = this._map.getBounds(true);
     const mapBoundsBox = {
       minX: mapBounds.getWest(),
       minY: mapBounds.getSouth(),
@@ -422,7 +422,7 @@ const markersCanvas = {
   _animateZoom(event) {
     const scale = this._map.getZoomScale(event.zoom);
     const offset = this._map._latLngBoundsToNewLayerBounds(
-      this._map.getBounds(),
+      this._map.getBounds(true),
       event.zoom,
       event.center
     ).min;
