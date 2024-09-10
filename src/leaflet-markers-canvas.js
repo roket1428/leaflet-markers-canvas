@@ -238,7 +238,7 @@ const markersCanvas = {
     L.Util.stamp(marker);
 
     const latLng = marker.getLatLng();
-    const isVisible = this._map.getBounds().contains(latLng);
+    const isVisible = this._map.getBounds(true).contains(latLng);
     const { x, y } = this._map.latLngToContainerPoint(latLng);
     const { iconSize, iconAnchor } = marker.options.icon.options;
 
