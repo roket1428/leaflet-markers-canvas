@@ -98,7 +98,11 @@ const markersCanvas = {
 
   removeMarker(marker) {
     const latLng = marker.getLatLng();
-    const isVisible = this._map.getBounds(true).contains(latLng);
+    let bounds = this._map.getBounds(true)
+    if (typeof bounds == "undefined") {
+      bounds = this._map.getBounds()
+    }
+    const isVisible = bounds.contains(latLng);
 
     const positionBox = {
       minX: latLng.lng,
@@ -123,7 +127,11 @@ const markersCanvas = {
 
     markers.forEach((marker) => {
       const latLng = marker.getLatLng();
-      const isVisible = this._map.getBounds(true).contains(latLng);
+      let bounds = this._map.getBounds(true)
+      if (typeof bounds == "undefined") {
+        bounds = this._map.getBounds()
+      }
+      const isVisible = bounds.contains(latLng);
 
       const positionBox = {
         minX: latLng.lng,
@@ -238,7 +246,11 @@ const markersCanvas = {
     L.Util.stamp(marker);
 
     const latLng = marker.getLatLng();
-    const isVisible = this._map.getBounds(true).contains(latLng);
+    let bounds = this._map.getBounds(true)
+    if (typeof bounds == "undefined") {
+      bounds = this._map.getBounds()
+    }
+    const isVisible = bounds.contains(latLng);
     const { x, y } = this._map.latLngToContainerPoint(latLng);
     const { iconSize, iconAnchor } = marker.options.icon.options;
 
@@ -324,7 +336,11 @@ const markersCanvas = {
 
     if (!this._map || !this._positionsTree) return;
 
-    const mapBounds = this._map.getBounds(true);
+    let bounds = this._map.getBounds(true)
+    if (typeof bounds == "undefined") {
+      bounds = this._map.getBounds()
+    }
+    const mapBounds = bounds;
     const mapBoundsBox = {
       minX: mapBounds.getWest(),
       minY: mapBounds.getSouth(),
@@ -421,8 +437,12 @@ const markersCanvas = {
 
   _animateZoom(event) {
     const scale = this._map.getZoomScale(event.zoom);
+    let bounds = this._map.getBounds(true)
+    if (typeof bounds == "undefined") {
+      bounds = this._map.getBounds()
+    }
     const offset = this._map._latLngBoundsToNewLayerBounds(
-      this._map.getBounds(true),
+      bounds,
       event.zoom,
       event.center
     ).min;

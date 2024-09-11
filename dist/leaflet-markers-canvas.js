@@ -112,7 +112,11 @@
 
     removeMarker: function removeMarker(marker) {
       var latLng = marker.getLatLng();
-      var isVisible = this._map.getBounds(true).contains(latLng);
+      var bounds = this._map.getBounds(true);
+      if (typeof bounds == "undefined") {
+        bounds = this._map.getBounds();
+      }
+      var isVisible = bounds.contains(latLng);
 
       var positionBox = {
         minX: latLng.lng,
@@ -139,7 +143,11 @@
 
       markers.forEach(function (marker) {
         var latLng = marker.getLatLng();
-        var isVisible = this$1._map.getBounds(true).contains(latLng);
+        var bounds = this$1._map.getBounds(true);
+        if (typeof bounds == "undefined") {
+          bounds = this$1._map.getBounds();
+        }
+        var isVisible = bounds.contains(latLng);
 
         var positionBox = {
           minX: latLng.lng,
@@ -256,7 +264,11 @@
       L.Util.stamp(marker);
 
       var latLng = marker.getLatLng();
-      var isVisible = this._map.getBounds(true).contains(latLng);
+      var bounds = this._map.getBounds(true);
+      if (typeof bounds == "undefined") {
+        bounds = this._map.getBounds();
+      }
+      var isVisible = bounds.contains(latLng);
       var ref = this._map.latLngToContainerPoint(latLng);
       var x = ref.x;
       var y = ref.y;
@@ -363,7 +375,11 @@
 
       if (!this._map || !this._positionsTree) { return; }
 
-      var mapBounds = this._map.getBounds(true);
+      var bounds = this._map.getBounds(true);
+      if (typeof bounds == "undefined") {
+        bounds = this._map.getBounds();
+      }
+      var mapBounds = bounds;
       var mapBoundsBox = {
         minX: mapBounds.getWest(),
         minY: mapBounds.getSouth(),
@@ -470,8 +486,12 @@
 
     _animateZoom: function _animateZoom(event) {
       var scale = this._map.getZoomScale(event.zoom);
+      var bounds = this._map.getBounds(true);
+      if (typeof bounds == "undefined") {
+        bounds = this._map.getBounds();
+      }
       var offset = this._map._latLngBoundsToNewLayerBounds(
-        this._map.getBounds(true),
+        bounds,
         event.zoom,
         event.center
       ).min;
