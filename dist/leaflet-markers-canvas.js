@@ -112,11 +112,11 @@
 
     removeMarker: function removeMarker(marker) {
       var latLng = marker.getLatLng();
-      var bounds = this._map.getBounds(true);
-      if (typeof bounds == "undefined") {
-        bounds = this._map.getBounds();
+      var bounds = null;
+      if (this._map) {
+        bounds = this._map.getBounds(true);
       }
-      var isVisible = bounds.contains(latLng);
+      var isVisible = bounds ? bounds.contains(latLng) : false;
 
       var positionBox = {
         minX: latLng.lng,
@@ -143,11 +143,11 @@
 
       markers.forEach(function (marker) {
         var latLng = marker.getLatLng();
-        var bounds = this$1._map.getBounds(true);
-        if (typeof bounds == "undefined") {
-          bounds = this$1._map.getBounds();
+        var bounds = null;
+        if (this$1._map) {
+          bounds = this$1._map.getBounds(true);
         }
-        var isVisible = bounds.contains(latLng);
+        var isVisible = bounds ? bounds.contains(latLng) : false;
 
         var positionBox = {
           minX: latLng.lng,

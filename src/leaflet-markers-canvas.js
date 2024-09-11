@@ -98,11 +98,11 @@ const markersCanvas = {
 
   removeMarker(marker) {
     const latLng = marker.getLatLng();
-    let bounds = this._map.getBounds(true)
-    if (typeof bounds == "undefined") {
-      bounds = this._map.getBounds()
+    let bounds = null
+    if (this._map) {
+      bounds = this._map.getBounds(true)
     }
-    const isVisible = bounds.contains(latLng);
+    const isVisible = bounds ? bounds.contains(latLng) : false;
 
     const positionBox = {
       minX: latLng.lng,
@@ -127,11 +127,11 @@ const markersCanvas = {
 
     markers.forEach((marker) => {
       const latLng = marker.getLatLng();
-      let bounds = this._map.getBounds(true)
-      if (typeof bounds == "undefined") {
-        bounds = this._map.getBounds()
+      let bounds = null
+      if (this._map) {
+        bounds = this._map.getBounds(true)
       }
-      const isVisible = bounds.contains(latLng);
+      const isVisible = bounds ? bounds.contains(latLng) : false;
 
       const positionBox = {
         minX: latLng.lng,
